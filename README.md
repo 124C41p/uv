@@ -1,3 +1,8 @@
+# Fork
+
+This is a fork of `uv` fixing [an issue](https://github.com/astral-sh/uv/issues/9243) related to TLS certificates by explicitly using `rustls_platform_verifier`.
+
+
 # uv
 
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)

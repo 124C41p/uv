@@ -45,6 +45,8 @@ percent-encoding = { workspace = true }
 reqwest = { workspace = true }
 reqwest-middleware = { workspace = true }
 reqwest-retry = { workspace = true }
+rustls = { workspace = true }
+rustls-platform-verifier = { workspace = true }
 rkyv = { workspace = true }
 rmp-serde = { workspace = true }
 rustc-hash = { workspace = true }

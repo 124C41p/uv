@@ -13,6 +13,7 @@ use reqwest_retry::policies::ExponentialBackoff;
 use reqwest_retry::{
     DefaultRetryableStrategy, RetryTransientMiddleware, Retryable, RetryableStrategy,
 };
+use rustls_platform_verifier::BuilderVerifierExt;
 use tracing::{debug, trace};
 use url::Url;
 
@@ -295,7 +296,16 @@ impl<'a> BaseClientBuilder<'a> {
         };
 
         let client_builder = if self.native_tls || ssl_cert_file_exists {
-            client_builder.tls_built_in_native_certs(true)
+            client_builder.use_preconfigured_tls(
+                rustls::ClientConfig::builder_with_provider(Arc::new(
+                    rustls::crypto::ring::default_provider(),
+                ))
+                .with_safe_default_protocol_versions()
+                .unwrap()
+                .with_platform_verifier()
+                .unwrap()
+                .with_no_client_auth(),
+            )
         } else {
             client_builder.tls_built_in_webpki_certs(true)
         };
